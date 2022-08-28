@@ -66,18 +66,56 @@ function crear_nuevo_producto(){
     // Mostrar array y su contenido
     console.log(array_productos);
 
-
     // Limpiamos los campos
     nombre_producto = document.getElementById("producto_nombre").value = "";
     precio_producto = document.getElementById("producto_precio").value = "";
     valor_contador = 0;
     contador.innerHTML = valor_contador;
-  });
+
+    //
+
+    let contenedor_de_productos = document.getElementById("contenedor_de_productos");
+    let template = '';
 
 
-} 
+    
+    
+    for(i = 0; array_productos.length ; i++){
 
-crear_nuevo_producto();
+      template += `
+          <div class="card col-5 p-0 mb-3" style="height: 12.5rem;">
+            <div class="card-header">  </div>
+            <div class="card-body">
+              <h5>${array_productos[i].nombre}</h5>
+              <p>
+              Precio: ${array_productos[i].precio} <br>
+              Stock: ${array_productos[i].stock}
+              </p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-danger" disabled>Eliminar</button>
+            </div>
+          </div>
+        `;      
+      
+        contenedor_de_productos.innerHTML = template;
+      }
+      
+      
+      
+      
+      
+      
+      
+    });
 
-
-
+    
+    
+  } 
+  
+  crear_nuevo_producto();
+  
+  
+        function borrar_producto(valor){
+          console.log(valor);
+        }

@@ -12,9 +12,10 @@
   <link rel="stylesheet" href="assets/scss/main.css">
 </head>
 <body style="background: #333333;">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-6 bg-light">
+      <!-- Formulario -->
+      <div class="col-4 bg-light border-end">
         <div class="row p-4">
 
           <input class="col-12 form-control mb-3" placeholder="Producto" type="text" name="producto_nombre" id="producto_nombre">
@@ -27,6 +28,13 @@
             </div>
           </div>
           <button class="btn btn-outline-primary col-12" id="crear_producto">Crear</button>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-8 bg-light">
+        <div class="row justify-content-around p-4 vh-100 overflow-auto" id="contenedor_de_productos">
+          
+          
         </div>
       </div>
     </div>
