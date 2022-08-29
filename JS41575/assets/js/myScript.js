@@ -35,7 +35,6 @@ function cantidad_stock(){
 
 cantidad_stock();
 
-
 // Clase "producto" el cual tendrá al constructor de la clase
 class producto{
   constructor(nombre, precio, stock){
@@ -53,69 +52,61 @@ function crear_nuevo_producto(){
   // Array que contendra los productos en forma de objetos
   const array_productos = [];
 
-  crear_button.addEventListener("click", () => {
+  crear_button.addEventListener("click", () => {  // Al darle al boton para crear el producto
 
     let nombre_producto = document.getElementById("producto_nombre").value; // Obtenemos producto nombre input
     let precio_producto = document.getElementById("producto_precio").value; // Obtenemos producto precio input
-
-
-    // Instanciamos la clase "producto" para crear un nuevo producto
-    const nuevo_producto = new producto(nombre_producto, precio_producto, valor_contador);
-    // Método por el cual meteremos esos objetos al array
-    array_productos.push(nuevo_producto);
-    // Mostrar array y su contenido
-    console.log(array_productos);
-
-    // Limpiamos los campos
-    nombre_producto = document.getElementById("producto_nombre").value = "";
-    precio_producto = document.getElementById("producto_precio").value = "";
-    valor_contador = 0;
-    contador.innerHTML = valor_contador;
-
-    //
-
-    let contenedor_de_productos = document.getElementById("contenedor_de_productos");
-    let template = '';
-
-
     
+    // Si el campo "nombre" o "precio" están vacíos, dar una alerta
+    // de lo contrario, crear el objeto producto
+    if(nombre_producto != "" && precio_producto != ""){
+        // Instanciamos la clase "producto" para crear un nuevo producto
+        const nuevo_producto = new producto(nombre_producto, precio_producto, valor_contador);
+        // Método por el cual meteremos esos objetos al array
+        array_productos.push(nuevo_producto);
+        // Mostrar array y su contenido
+        console.log(array_productos);
     
-    for(i = 0; array_productos.length ; i++){
-
-      template += `
-          <div class="card col-5 p-0 mb-3" style="height: 12.5rem;">
-            <div class="card-header">  </div>
-            <div class="card-body">
-              <h5>${array_productos[i].nombre}</h5>
-              <p>
-              Precio: ${array_productos[i].precio} <br>
-              Stock: ${array_productos[i].stock}
-              </p>
-            </div>
-            <div class="card-footer">
-              <button class="btn btn-outline-danger" disabled>Eliminar</button>
-            </div>
-          </div>
-        `;      
+        // Limpiamos los campos
+        nombre_producto = document.getElementById("producto_nombre").value = "";
+        precio_producto = document.getElementById("producto_precio").value = "";
+        valor_contador = 0;
+        contador.innerHTML = valor_contador;
+    
+        //
+    
+        let contenedor_de_productos = document.getElementById("contenedor_de_productos");
+        let template = '';
+  
+  
       
-        contenedor_de_productos.innerHTML = template;
+      
+        for(i = 0; array_productos.length ; i++){
+          template += `
+            <div class="card col-5 p-0 mb-3" style="height: 12.5rem;">
+              <div class="card-header">  </div>
+              <div class="card-body">
+                <h5>${array_productos[i].nombre}</h5>
+                <p>
+                Precio: ${array_productos[i].precio} <br>
+                Stock: ${array_productos[i].stock}
+                </p>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-outline-danger" disabled>Eliminar</button>
+              </div>
+            </div>
+            `;      
+          
+          contenedor_de_productos.innerHTML = template;
+        }
+        
       }
-      
-      
-      
-      
-      
-      
-      
-    });
-
-    
+      else{
+        alert("No puedes tener campos vacíos.");
+      }       
+    });    
     
   } 
   
   crear_nuevo_producto();
-  
-  
-        function borrar_producto(valor){
-          console.log(valor);
-        }
