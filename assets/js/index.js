@@ -6,25 +6,30 @@ function main()
       formulario_ingreso = document.getElementById("LogIn_Form"),
       botones_ingreso = formulario_ingreso.getElementsByTagName("button"),
       botones_registro = formulario_registro.getElementsByTagName("button");
-  
+      
+  //
+  botones_registro[0].addEventListener("click", crear_nuevo_usuario); // Boton "Aceptar" que creara al usuario
 
+  // FUNCIONES
   function cambiar_entre_formularios()
   {
-    function addClassForToggle()
+    function addClassForToggle(e)
     { // Funcion que agrega la clase bootstrap d-none para cambiar entre formularios
+      e.preventDefault();
+
       formulario_ingreso.classList.toggle("d-none");
       formulario_registro.classList.toggle("d-none");
     }
     
     botones_ingreso[1].addEventListener("click", addClassForToggle); // Boton "Registrarse"
-    botones_registro[0].addEventListener("click", crear_nuevo_usuario); // Boton "Aceptar" que creara al usuario
     botones_registro[1].addEventListener("click", addClassForToggle);  // Boton "Volver atras"
   }
   cambiar_entre_formularios(); // Cambiar entre formularios -- LogIn & SignIn
   
 
-  function crear_nuevo_usuario()
+  function crear_nuevo_usuario(e)
   {
+    e.preventDefault(); // Prevent del formulario para que no envie el mismo o recargue
     // Variables
     const usuariosArray = []; // Array que contrenda a los usuarios
     
@@ -44,18 +49,25 @@ function main()
         this.contraseña = ParametroContraseña;
       }
     }
-    
-    // Instanciamos la clase para poder usarla y le pasamos los parametros de los inputs
-    const miNuevoUsuario = new NuevoUsuario(id, inputUsuario, inputContraseña);
-    usuariosArray.push(miNuevoUsuario);
-    
-    const usuariosJSON = JSON.stringify(usuariosArray);
-    
 
-
-    localStorage.setItem("Usuarios", usuariosJSON);
-
-    // CONTINUAR CON MEJORAR EL ARRAY PARA CONTENER MÁS USUARIOS Y EL KEY:VALUE DEL LOCAL STORAGE
+    if(inputUsuario == '' || inputContraseña == '')
+    {
+      alert("Completa todos los campos para poder registrarte.");
+    }
+    else
+    {
+      // Instanciamos la clase para poder usarla y le pasamos los parametros de los inputs
+      const miNuevoUsuario = new NuevoUsuario(id, inputUsuario, inputContraseña);
+      usuariosArray.push(miNuevoUsuario);
+      
+      const usuariosJSON = JSON.stringify(usuariosArray);
+      
+      localStorage.setItem("Usuarios", usuariosJSON);
+  
+      alert("Usuario creado satisfactoriamente.");
+      // CONTINUAR CON MEJORAR EL ARRAY PARA CONTENER MÁS USUARIOS Y EL KEY:VALUE DEL LOCAL STORAGE
+    }
+    
 
   }
 

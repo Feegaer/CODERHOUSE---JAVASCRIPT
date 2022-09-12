@@ -14,10 +14,11 @@
 <body>
   <div class="container-fluid">
     <div class="row vh-100">
-      <div class="col-5 h-100 bg-light">
+      <!-- Crear nuevo producto -->
+      <div class="col-4 h-100 bg-light">
         <form class="row p-4" action="" id="newProduct_Form">
           <div class="col-12 mb-2">
-            <input class="form-control" placeholder="Nombre del producto" type="text">
+            <input class="form-control" placeholder="Producto" type="text">
           </div>
           <div class="col-7 mb-2 pe-2">
             <input class="form-control" placeholder="Precio" type="text">
@@ -26,10 +27,17 @@
             <input class="form-control" placeholder="Stock" type="text">
           </div>
           <div class="col-12">
-            <button class="btn btn-primary w-100">Añadir nuevo producto</button>
+            <button class="btn btn-primary w-100">Añadir</button>
           </div>
         </form>
+        <div class="row p-4">
+          <div class="col-12">
+            <a href="/index.html" class="btn btn-secondary">SALIR</a>
+          </div>
+        </div>
       </div>
+      <!-- Contenedor o Lista de productos-->
+      <div class="col-8 h-100" id="productosContainer"></div>
     </div>
   </div>
   <!-- JavaScript Bundle with Popper -->
