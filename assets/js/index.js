@@ -52,7 +52,12 @@ function main()
 
     if(inputUsuario == '' || inputContraseña == '')
     {
-      alert("Completa todos los campos para poder registrarte.");
+      swal({
+        text: "Completa todos los campos para registrarte",
+        icon: "warning",
+        button: false,
+        timer: 2000
+      });
     }
     else
     {
@@ -64,7 +69,12 @@ function main()
       
       localStorage.setItem("Usuarios", usuariosJSON);
   
-      alert("Usuario creado satisfactoriamente.");
+      swal({
+        text: "Usuario creado!",
+        icon: "success",
+        button: false,
+        timer: 2000
+      });
       // CONTINUAR CON MEJORAR EL ARRAY PARA CONTENER MÁS USUARIOS Y EL KEY:VALUE DEL LOCAL STORAGE
     }
     
@@ -94,7 +104,12 @@ function main()
       }
       else  // Sino, vuelve a intentar
       {
-        alert("Credenciales incorrectas.");
+        swal({
+          text: "Credenciales incorrectas.",
+          icon: "warning",
+          timer: 1500,
+          button: false
+        });
       }
       
 

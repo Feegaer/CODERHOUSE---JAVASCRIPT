@@ -17,7 +17,8 @@ function main(){
           
     let nombreProducto = inputsNewProdForm[0].value,
         precioProducto = inputsNewProdForm[1].value,
-        stockProducto = inputsNewProdForm[2].value;
+        stockProducto = inputsNewProdForm[2].value,
+        id = 0;
     // Clase que creara nuestros productos
     class NuevoProducto
     {
@@ -31,14 +32,18 @@ function main(){
     // Verificamos que los campos no esten vacíos
     if(nombreProducto == '' || precioProducto == '' || stockProducto == '')
     {
-      alert("Debes completar todos los campos para poder agregar un nuevo producto al mercado.");
+      swal({
+        title: "Error",
+        text: "Completa todos los campos.",
+        icon: "warning",
+        button: false,
+        timer: 2000
+      });
     }
     else
     {
-      let id = 0; // Valor inicial del identificador
       // Instanciamos nuestra clase para pasarle los parametros y utilizarla
       const nuevoProducto = new NuevoProducto(id, nombreProducto, precioProducto, stockProducto);
-
       arrayProductos.push(nuevoProducto); // Pusheamos nuestro objeto al array
       console.log(arrayProductos);  // Mostramos el contenido del array
       
@@ -48,6 +53,7 @@ function main(){
           
       for( i = 0; arrayProductos.length; i++)
       {
+        
         template += `
             <div class="card bg-light p-0 mb-3" style="width: 12.5rem;">
               <div class="card-header">
@@ -55,6 +61,7 @@ function main(){
               </div>
               <div class="card-body">
                 <p>
+                  ID: ${arrayProductos[i].id} <br>
                   Precio: ${arrayProductos[i].precio} <br>
                   <span class="small">Stock: ${arrayProductos[i].stock}</span>
                 </p>
@@ -64,7 +71,7 @@ function main(){
               </div>
             </div>
         `;  
-        
+
         container.innerHTML = template;
       }
       
@@ -75,6 +82,7 @@ function main(){
     // Agregar borrar producto
 
   }
+
 }
 
 main();

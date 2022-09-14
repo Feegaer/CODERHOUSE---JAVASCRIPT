@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <!-- my SCSS -->
   <link rel="stylesheet" href="assets/scss/main.css">
+  <!--SweetAlert-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
   <div class="container-fluid">
     <div class="row vh-100 align-items-center justify-content-center">
-      <div class="col-4 bg-light">
+      <div class="col-4 bg-light rounded-3 p-2">
         <!-- Formulario de ingreso-->
         <form class="row p-4" action="" id="LogIn_Form">
           <div class="col-12 mb-2">
@@ -29,7 +31,7 @@
           </div>
         </form>
         <!-- Formulario de registro-->
-        <form class="row p-4 d-none" action="" id="SignIn_Form">
+        <form class="row p-4 d-none rounded-3" action="" id="SignIn_Form">
           <div class="col-12 mb-2">
             <input class="form-control" placeholder="Nuevo usuario" type="text">
           </div>
