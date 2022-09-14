@@ -2,12 +2,25 @@ function main(){
   // Variables y Constantes
   const newProdForm = document.getElementById("newProduct_Form"),
         inputsNewProdForm = newProdForm.getElementsByTagName("input"),
-        buttons = newProdForm.getElementsByTagName("button");
+        buttons = newProdForm.getElementsByTagName("button"),
+        arrayProductos = [];
 
-        
-        const arrayProductos = [];
-        // Boton "Añadir nuevo producto"
-        buttons[0].addEventListener("click", crearNuevoProducto);
+  // Funcion que reutilizaremos para crear alertas
+  function mySweetAlert(icono, texto, timer, button)
+  {
+    swal({
+      icon: icono,
+      text: texto,
+      timer: timer,
+      button: button
+    });
+  }
+
+  // Funcion para los eventos click
+  function eventoClick(boton, arrayPos, miFuncion)
+  {
+    boton[arrayPos].addEventListener("click", miFuncion)
+  }
         
   // Funcion que creara al nuevo producto
   function crearNuevoProducto(e)
@@ -32,13 +45,7 @@ function main(){
     // Verificamos que los campos no esten vacíos
     if(nombreProducto == '' || precioProducto == '' || stockProducto == '')
     {
-      swal({
-        title: "Error",
-        text: "Completa todos los campos.",
-        icon: "warning",
-        button: false,
-        timer: 2000
-      });
+      mySweetAlert("warning", "Completa todos los campos.", 3000, false);
     }
     else
     {
@@ -82,6 +89,13 @@ function main(){
     // Agregar borrar producto
 
   }
+
+
+
+  //
+  // Boton "Añadir nuevo producto"
+  eventoClick(buttons, 0, crearNuevoProducto);
+
 
 }
 

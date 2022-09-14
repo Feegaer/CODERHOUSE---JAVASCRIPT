@@ -1,18 +1,32 @@
-
 function main()
 {
   // Variables
   let formulario_registro =  document.getElementById("SignIn_Form"),
       formulario_ingreso = document.getElementById("LogIn_Form"),
       botones_ingreso = formulario_ingreso.getElementsByTagName("button"),
-      botones_registro = formulario_registro.getElementsByTagName("button"),
-      icono, texto, timer, button;
-      
-  //
-  botones_registro[0].addEventListener("click", crear_nuevo_usuario); // Boton "Aceptar" que creara al usuario
+      botones_registro = formulario_registro.getElementsByTagName("button");
+
+
+
+  // Funcion que reutilizaremos para crear alertas
+  function mySweetAlert(icono, texto, timer, button)
+  {
+    swal({
+      icon: icono,
+      text: texto,
+      timer: timer,
+      button: button
+    });
+  }
+
+  // Funcion, que como indica el nombre, sera para los eventos click
+  function eventoClick(boton, arrayPos, miFuncion)
+  {
+    boton[arrayPos].addEventListener("click", miFuncion)
+  }
 
   // FUNCIONES
-  function cambiar_entre_formularios()
+  function formularios()
   {
     function addClassForToggle(e)
     { // Funcion que agrega la clase bootstrap d-none para cambiar entre formularios
@@ -22,12 +36,11 @@ function main()
       formulario_registro.classList.toggle("d-none");
     }
     
-    botones_ingreso[1].addEventListener("click", addClassForToggle); // Boton "Registrarse"
-    botones_registro[1].addEventListener("click", addClassForToggle);  // Boton "Volver atras"
-  }
-  cambiar_entre_formularios(); // Cambiar entre formularios -- LogIn & SignIn
+    eventoClick(botones_ingreso, 1, addClassForToggle); // Boton para ir a registro
+    eventoClick(botones_registro, 1, addClassForToggle);  // Boton para volver atras
+    eventoClick(botones_registro, 0, crear_nuevo_usuario);  // Boton para confirmar el registro
+  }  
   
-
   function crear_nuevo_usuario(e)
   {
     e.preventDefault(); // Prevent del formulario para que no envie el mismo o recargue
@@ -38,9 +51,9 @@ function main()
         inputUsuario = inputs[0].value,
         inputContraseña = inputs[1].value,
         id = 0;  // Valores de entrada de los inputs
+        
     
-    
-    // Clase que nos creara el nuevo usuario
+        // Clase que nos creara el nuevo usuario
     class NuevoUsuario
     {
       constructor(ParametroID, ParametroUsuario, ParametroContraseña)
@@ -51,15 +64,10 @@ function main()
       }
     }
 
+    // Verificación de campos para que no se cree un usuario vacío
     if(inputUsuario == '' || inputContraseña == '')
     {
-
-      icono = "warning",
-      texto = "Completa todos los campos para registrarte.",
-      timer = 3000, 
-      button = false;
-
-      mySweetAlert(icono, texto, timer, button);
+      mySweetAlert("warning", "Completa todos los campos para registrarte.", 3000, false);
     }
     else
     {
@@ -70,27 +78,11 @@ function main()
       const usuariosJSON = JSON.stringify(usuariosArray);
       
       localStorage.setItem("Usuarios", usuariosJSON);
-  
-      icono = "success",
-      texto = "¡Usuario creado!",
-      timer = 3000, 
-      button = false;
-
-      mySweetAlert(icono, texto, timer, button);
+      mySweetAlert("success", "¡Usuario creado!", 3000, false);
       // CONTINUAR CON MEJORAR EL ARRAY PARA CONTENER MÁS USUARIOS Y EL KEY:VALUE DEL LOCAL STORAGE
     }
     
 
-  }
-
-  // Funcion que reutilizaremos para crear alertas
-  function mySweetAlert(icono, texto, timer, button){
-    swal({
-      icon: icono,
-      text: texto,
-      timer: timer,
-      button: button
-    });
   }
 
 
@@ -128,7 +120,10 @@ function main()
 
     }
   }
-  ingresar();
+
+
+  formularios(); // Cambiar entre formularios -- LogIn & SignIn
+  ingresar(); // Funcion que realiza la verificación y el logeo
 
 }
 
