@@ -5,7 +5,8 @@ function main()
   let formulario_registro =  document.getElementById("SignIn_Form"),
       formulario_ingreso = document.getElementById("LogIn_Form"),
       botones_ingreso = formulario_ingreso.getElementsByTagName("button"),
-      botones_registro = formulario_registro.getElementsByTagName("button");
+      botones_registro = formulario_registro.getElementsByTagName("button"),
+      icono, texto, timer, button;
       
   //
   botones_registro[0].addEventListener("click", crear_nuevo_usuario); // Boton "Aceptar" que creara al usuario
@@ -52,12 +53,13 @@ function main()
 
     if(inputUsuario == '' || inputContraseña == '')
     {
-      swal({
-        text: "Completa todos los campos para registrarte",
-        icon: "warning",
-        button: false,
-        timer: 2000
-      });
+
+      icono = "warning",
+      texto = "Completa todos los campos para registrarte.",
+      timer = 3000, 
+      button = false;
+
+      mySweetAlert(icono, texto, timer, button);
     }
     else
     {
@@ -69,16 +71,26 @@ function main()
       
       localStorage.setItem("Usuarios", usuariosJSON);
   
-      swal({
-        text: "Usuario creado!",
-        icon: "success",
-        button: false,
-        timer: 2000
-      });
+      icono = "success",
+      texto = "¡Usuario creado!",
+      timer = 3000, 
+      button = false;
+
+      mySweetAlert(icono, texto, timer, button);
       // CONTINUAR CON MEJORAR EL ARRAY PARA CONTENER MÁS USUARIOS Y EL KEY:VALUE DEL LOCAL STORAGE
     }
     
 
+  }
+
+  // Funcion que reutilizaremos para crear alertas
+  function mySweetAlert(icono, texto, timer, button){
+    swal({
+      icon: icono,
+      text: texto,
+      timer: timer,
+      button: button
+    });
   }
 
 
@@ -104,12 +116,13 @@ function main()
       }
       else  // Sino, vuelve a intentar
       {
-        swal({
-          text: "Credenciales incorrectas.",
-          icon: "warning",
-          timer: 1500,
-          button: false
-        });
+        icono = "warning",
+        texto = "Credenciales incorrectas",
+        timer = 3000, 
+        button = false;
+
+        mySweetAlert(icono, texto, timer, button);
+
       }
       
 
