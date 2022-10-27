@@ -12,6 +12,7 @@ class Producto
 
 //////////////////// MAIN ////////////////////
 cartas();
+productosEnCarrito();
 //////////////////// FUNCIÓN QUE CREA LAS TARJETAS DINAMICAMENTE ////////////////////
 function cartas()
 {
@@ -72,13 +73,14 @@ function agregarProducto(btns)
 
         // FUNCION PARA CREAR EL ITEM EN EL CARRO
         crearItem(drink);
+        productosEnCarrito();
       })
     });
   }
   
 }
 
-
+////////////// FUNCIÓN QUE CREA EL ITEM DEL CARRITO //////////////
 function crearItem(item)
 {
   // Declaraciones
@@ -132,4 +134,43 @@ function existenciaItem(producto)
 
 }
 
+////////////// FUNCIÓN QUE GENERA LA VISTA DE LOS PRODUCTOS EN EL CARRITO //////////////
+function productosEnCarrito()
+{
+  let container, template;
+
+  container = document.getElementById("offcanvas-carrito")
+  template  = '';
+
+  if(localStorage.length != 0)
+  {
+    for(i = 0; i < localStorage.length; i++)
+    {
+      lsItem      = localStorage.getItem(localStorage.key(i));
+      objProducto = JSON.parse(lsItem);
+  
+  
+      template += `
+        <div class="row pt-4 px-4">
+          <div class="col-12 rounded-3" style="box-shadow: 0px 0px 5px 0.5px #DDDDDD;">
+            <div class="row">
+              <div class="col-4 p-0">
+                <img src="${objProducto.img}" class="img-fluid rounded-start">
+              </div>
+              <div class="col">
+                <h5 class="px-2 pt-2 small">${objProducto.nombre}<span class="text-muted small"> (${objProducto.cantidad})</span></h5>
+                <button class="btn btn-outline-light text-dark border ms-2 mt-2" style="height: 2.5rem; width: 2.5rem;">+</button>
+                <button class="btn btn-outline-light text-dark border mt-2" style="height: 2.5rem; width: 2.5rem;">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  
+    container.innerHTML = template;
+  }
+
+
+}
 
